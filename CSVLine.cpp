@@ -13,5 +13,6 @@ CSVLine::CSVLine(std::string line) {
 
     date = entry.at(0);
     name = entry.at(1);
-    amount = std::stof(entry.at(2).substr(1, -1));
+    //If entry is credit set debit to 0
+    amount = entry.at(3).size() ? std::stof(entry.at(3).substr(1, -1)) : 0;
 }

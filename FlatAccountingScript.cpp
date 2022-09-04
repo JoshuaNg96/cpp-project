@@ -34,6 +34,7 @@ int main()
     }
     ifile.close();
 
+    //append total expenses
     ofile << total << std::endl;
     ofile.close();
 
