@@ -8,9 +8,9 @@
 
 int main()
 {
-    float total = 0;
-    std::vector<std::string> name_list = { 
+    const std::vector<std::string> name_list = { 
         "ELECTRIC", "GROCERY", "INTERNET" }; //whitelist entries
+    float total = 0;
 
     //generate output file
     std::stringstream outNameStream;
