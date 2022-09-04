@@ -1,8 +1,9 @@
+#include "CSVLine.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
-#include "CSVLine.h"
+#include <ctime>
 
 
 int main()
@@ -10,25 +11,31 @@ int main()
     float total = 0;
     std::vector<std::string> name_list = { 
         "ELECTRIC", "GROCERY", "INTERNET" }; //whitelist entries
-    std::string file_entry, close;
-    std::ifstream file ( "DUMMY_INPUT.csv");
 
-    while (getline(file, file_entry)) {
+    //generate output file
+    std::stringstream outNameStream;
+    outNameStream << std::time(nullptr) << "_OUTPUT.csv";
+    std::ofstream ofile(outNameStream.str());
+
+    //Read each line of input file then append to output file
+    std::ifstream ifile("DUMMY_INPUT.csv");
+    std::string file_entry;
+    while (getline(ifile, file_entry)) {
         CSVLine line(file_entry);
         std::stringstream ss;
 
         for (auto name : name_list) {
             if (line.get_name().find(name) != std::string::npos) {
                 ss << line.get_date() << "," << line.get_name() << ",$" << line.get_amount() << std::endl;
-                std::cout << ss.str(); //TODO: Append to CSV
+                ofile << ss.str(); //append entry to output file
                 total += line.get_amount();
             }
         }
     }
+    ifile.close();
 
-    std::cout << total << std::endl; //TODO: Append to CSV
-    std::cout << "enter text to close console" << std::endl;
-    std::cin >> close;
+    ofile << total << std::endl;
+    ofile.close();
 
     return 0;
 }
