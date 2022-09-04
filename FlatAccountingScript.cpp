@@ -8,7 +8,7 @@
 
 int main()
 {
-    const std::vector<std::string> name_list = { 
+    const std::string name_list[] = {
         "ELECTRIC", "GROCERY", "INTERNET" }; //whitelist entries
     float total = 0;
 
